@@ -19,6 +19,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.SpanStyle
 
+
+//Placing the result below the input field and conversion buttons is the better option it follows the natural
+//top-to-bottom reading flow: users enter a value, choose a conversion, and then see the result afterward.
+//This makes the interface more intuitive, since the output always appears at the end of
+//the interaction rather than interrupting the input area.
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
