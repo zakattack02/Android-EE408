@@ -8,7 +8,7 @@ This repository contains Android applications and projects developed for EE 408 
 - **Institution**: Clarkson University
 - **Prerequisite**: EE 262
 - **Recent Professor**: Anthony Dowling
-- **Semester**: [Add Current Semester/Year]
+- **Semester**: Fall 2025
 
 ## Course Description
 
@@ -32,15 +32,51 @@ This repository includes Android projects covering key concepts in software desi
 
 ```
 Android-EE408/
-
+├── README.md                          # Main repository documentation
+├── ConwaysGameOfLife/                # Project 1: Conway's Game of Life (Kotlin CLI)
+│   ├── README.md                     # Project-specific documentation
+│   ├── src/
+│   │   └── main/
+│   │       └── kotlin/               # Kotlin source files
+│   │           └── Main.kt           # Main CLI application
+│   ├── build.gradle.kts              # Project build configuration
+│   └── [Additional Kotlin CLI files]
+├── UnitConverterApp/                 # Project 2: Unit Converter App (Android)
+│   ├── README.md                     # Project-specific documentation
+│   ├── app/                         # Main application module
+│   │   ├── src/
+│   │   │   ├── main/
+│   │   │   │   ├── java/com/example/unitconverterapp/
+│   │   │   │   │   ├── MainActivity.kt    # Main activity with Compose UI
+│   │   │   │   │   └── ui/theme/         # App theming and colors
+│   │   │   │   ├── res/                 # Android resources
+│   │   │   │   └── AndroidManifest.xml   # App configuration
+│   │   │   └── test/                    # Unit tests
+│   │   └── build.gradle.kts             # Module build configuration
+│   ├── build.gradle.kts                # Project build configuration
+│   ├── gradle/
+│   │   ├── libs.versions.toml          # Version catalog for dependencies
+│   │   └── wrapper/                    # Gradle wrapper files
+│   └── settings.gradle.kts             # Project settings
+├── [Project3]/                       # Placeholder for future projects
+│   ├── README.md                     # Project-specific documentation
+│   └── [Additional project files]
 ```
 
 ## Prerequisites
 
+### For All Projects
+- **JDK**: Java Development Kit 11 or higher
+- **Kotlin**: Latest stable version
+- **Git**: For version control
+
+### For Project 1 (Conway's Game of Life)
+- **IntelliJ IDEA Ultimate**: Latest version (available free for students)
+- **Gradle**: Build automation (bundled with IntelliJ)
+
+### For Project 2+ (Android Projects)
 - **Android Studio**: Latest stable version
-- **JDK**: Java Development Kit 8 or higher
-- **Android SDK**: API level 21 (Android 5.0) or higher
-- **Kotlin**: Latest stable version (recommended)
+- **Android SDK**: API level 24 (Android 7.0) or higher
 
 ## Getting Started
 
@@ -52,48 +88,76 @@ Android-EE408/
    cd Android-EE408
    ```
 
-2. **Open in Android Studio**
+2. **Open Project in IDE**
+   
+   **For Conway's Game of Life (Project 1):**
+   - Launch IntelliJ IDEA Ultimate
+   - Select "Open" and navigate to `ConwaysGameOfLife/` folder
+   - Wait for Gradle sync to complete
+   
+   **For Unit Converter App (Project 2):**
    - Launch Android Studio
    - Select "Open an existing Android Studio project"
-   - Navigate to the cloned repository folder
-   - Select the specific project folder you want to work with
+   - Navigate to `UnitConverterApp/` folder
+   - Wait for Gradle sync and indexing to complete
 
 3. **Build and Run**
+   
+   **For Conway's Game of Life:**
+   - In IntelliJ IDEA, navigate to `src/main/kotlin/Main.kt`
+   - Click the green arrow next to `main()` function or use `Shift + F10`
+   - Interact with the game through the console/terminal output
+   
+   **For Unit Converter App:**
    - Connect an Android device or start an emulator
    - Click the "Run" button or use `Shift + F10`
+   - The app will install and launch on your device/emulator
 
 ### Development Environment
 
-- **IDE**: Android Studio (recommended)
-- **Language**: Kotlin (primary), Java (legacy support)
+**Project 1 (Conway's Game of Life):**
+- **IDE**: IntelliJ IDEA Ultimate
+- **Language**: Kotlin (CLI)
 - **Build System**: Gradle
+- **Platform**: Desktop/Console application
+
+**Project 2+ (Android Projects):**
+- **IDE**: Android Studio
+- **Language**: Kotlin (primary)
+- **Build System**: Gradle with Kotlin DSL
+- **Platform**: Android mobile applications
 - **Version Control**: Git
 
 ## Projects
 
-### [Project Name 1]
-Brief description of the first project, its objectives, and key features implemented.
+### Project 1: Conway's Game of Life
+
+A Kotlin command-line implementation of Conway's Game of Life, demonstrating fundamental programming concepts and algorithmic thinking. This project explores cellular automata, grid-based simulations, and object-oriented design principles using IntelliJ IDEA Ultimate.
+
+
+### Project 2: Unit Converter App
+
+An elegant Android unit conversion application built with Jetpack Compose, demonstrating modern Android development practices and UI design principles. The app supports conversions for Speed (mph ⇄ kph), Mass (kg ⇄ lbs), and Temperature (Celsius ⇄ Fahrenheit) with a responsive, Material Design 3-based interface.
 
 **Key Features:**
-- Feature 1
-- Feature 2
-- Feature 3
+- Multiple conversion categories (Speed, Mass, Temperature)
+- Real-time conversion calculations with formatted output
+- Intuitive UI with gradient backgrounds and category-based layout
+- Smart input handling with numeric keyboard and error messaging
 
 **Technologies Used:**
-- Android SDK
-- [Additional libraries/frameworks]
+- Android SDK (API 24+)
+- Jetpack Compose (BOM 2024.09.00)
+- Kotlin 2.0.21
+- Gradle with Kotlin DSL
 
-### [Project Name 2]
-Brief description of the second project, its objectives, and key features implemented.
+**Learning Objectives:**
+- Modern Android development with Jetpack Compose
+- Event-driven UI programming and state management
+- Material Design 3 implementation
+- Mobile app architecture and best practices
 
-**Key Features:**
-- Feature 1
-- Feature 2
-- Feature 3
-
-**Technologies Used:**
-- Android SDK
-- [Additional libraries/frameworks]
+**Documentation**: See UnitConverterApp/README.md for detailed setup and usage instructions.
 
 ## Learning Objectives
 
@@ -108,7 +172,6 @@ Through these projects, students will learn:
 - **Multithreading in Visual Applications**: Implementing concurrent operations safely
 - **Synchronization and Resource Management**: Preventing race conditions and managing shared resources
 - **Performance Optimization**: Debugging and optimizing visual applications
-
 
 ## Documentation
 
