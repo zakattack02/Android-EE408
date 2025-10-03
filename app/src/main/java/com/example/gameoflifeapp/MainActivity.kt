@@ -23,7 +23,7 @@ import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 // Simple Game of Life class
-class SimpleGOL(var width: Int, var height: Int) {
+class GOL(var width: Int, var height: Int) {
     var board: MutableList<MutableList<Boolean>>
     var generation = 0
 
@@ -104,8 +104,8 @@ class SimpleGOL(var width: Int, var height: Int) {
         board = newBoard
     }
 
-    fun copy(): SimpleGOL {
-        val new = SimpleGOL(width, height)
+    fun copy(): GOL {
+        val new = GOL(width, height)
         new.board = board.map { it.toMutableList() }.toMutableList()
         new.generation = generation
         return new
@@ -132,7 +132,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
-    var game by remember { mutableStateOf(SimpleGOL(15, 10)) }
+    var game by remember { mutableStateOf(GOL(15, 10)) }
     var isPlaying by remember { mutableStateOf(false) }
     var speed by remember { mutableStateOf(500L) }
 
@@ -198,7 +198,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        // All controls pinned to bottom
+        // All controls
         Column {
             // Play/Pause
             Row(
@@ -257,13 +257,13 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Size controls - Width
+            // Size controls
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                  Button(
                     onClick = { 
-                        if (game.height < 99999) {
+                        if (game.height < 25 || game.height > 5) {
                             game.resize(game.width, game.height + 1)
                             game = game.copy()
                         }
@@ -275,7 +275,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 
                 Button(
                     onClick = { 
-                        if (game.width < 99999) {
+                        if (game.width < 25 || game.width > 5) {
                             game.resize(game.width + 1, game.height)
                             game = game.copy()
                         }
@@ -286,7 +286,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            // Size controls - Height  
+            // Size controls
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
