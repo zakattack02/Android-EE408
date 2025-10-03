@@ -22,7 +22,7 @@ import com.example.gameoflifeapp.ui.theme.GameOfLifeAppTheme
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
-// Simple Game of Life class
+// Game of Life class
 class GOL(var width: Int, var height: Int) {
     var board: MutableList<MutableList<Boolean>>
     var generation = 0
@@ -121,7 +121,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    SimpleGameOfLifeScreen(
+                    GameOfLifeScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
+fun GameOfLifeScreen(modifier: Modifier = Modifier) {
     var game by remember { mutableStateOf(GOL(15, 10)) }
     var isPlaying by remember { mutableStateOf(false) }
     var speed by remember { mutableStateOf(500L) }
@@ -150,7 +150,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Simple header
+        // header
         Text(
             text = "Game of Life - Generation: ${game.generation}",
             fontSize = 18.sp,
@@ -164,7 +164,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Simple game board - takes up available space above buttons
+        // game board - takes up available space above buttons
         val cellSize = maxOf(8.dp, 250.dp / maxOf(game.width, game.height))
         
         LazyVerticalGrid(
@@ -207,11 +207,9 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 Button(
                     onClick = { 
                         isPlaying = !isPlaying
-                        when (game.generation) {
-                            0 -> {
-                                game.randomize()
-                                game = game.copy()
-                            }
+                        if (game.generation == 0 && game.board.all { row -> row.all { !it } }) {
+                            game.randomize()
+                            game = game.copy()
                         }
                     },
                     modifier = Modifier.weight(1f)
@@ -263,7 +261,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
             ) {
                  Button(
                     onClick = { 
-                        if (game.height < 25 || game.height > 5) {
+                        if (game.height < 25) {
                             game.resize(game.width, game.height + 1)
                             game = game.copy()
                         }
@@ -275,7 +273,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 
                 Button(
                     onClick = { 
-                        if (game.width < 25 || game.width > 5) {
+                        if (game.width < 25) {
                             game.resize(game.width + 1, game.height)
                             game = game.copy()
                         }
