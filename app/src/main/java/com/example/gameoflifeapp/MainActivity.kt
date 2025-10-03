@@ -164,13 +164,14 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Simple game board
+        // Simple game board - takes up available space above buttons
         val cellSize = maxOf(8.dp, 250.dp / maxOf(game.width, game.height))
         
         LazyVerticalGrid(
             columns = GridCells.Fixed(game.width),
             modifier = Modifier
                 .fillMaxWidth()
+                .weight(1f) // Takes up remaining space
                 .border(2.dp, Color.Black),
             horizontalArrangement = Arrangement.spacedBy(1.dp),
             verticalArrangement = Arrangement.spacedBy(1.dp)
@@ -197,16 +198,22 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Simple controls
+        // All controls pinned to bottom
         Column {
-            // Play controls
+            // Play/Pause
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Button(
-                    onClick = { isPlaying = !isPlaying },
+                    onClick = { 
+                        isPlaying = !isPlaying
+                        when (game.generation) {
+                            0 -> {
+                                game.randomize()
+                                game = game.copy()
+                            }
+                        }
+                    },
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(if (isPlaying) "Pause" else "Play")
@@ -254,20 +261,21 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Button(
+                 Button(
                     onClick = { 
-                        if (game.width > 5) {
-                            game.resize(game.width - 1, game.height)
+                        if (game.height < 99999) {
+                            game.resize(game.width, game.height + 1)
                             game = game.copy()
                         }
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text("- Width")
+                    Text("+ Height")
                 }
+                
                 Button(
                     onClick = { 
-                        if (game.width < 30) {
+                        if (game.width < 99999) {
                             game.resize(game.width + 1, game.height)
                             game = game.copy()
                         }
@@ -278,7 +286,7 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            // Size controls - Height
+            // Size controls - Height  
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
@@ -295,14 +303,14 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 }
                 Button(
                     onClick = { 
-                        if (game.height < 25) {
-                            game.resize(game.width, game.height + 1)
+                        if (game.width > 5) {
+                            game.resize(game.width - 1, game.height)
                             game = game.copy()
                         }
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text("+ Height")
+                    Text("- Width")
                 }
             }
 
@@ -316,10 +324,5 @@ fun SimpleGameOfLifeScreen(modifier: Modifier = Modifier) {
                 valueRange = 100f..1000f
             )
         }
- true)
-@Composable
-fun GameOfLifeScreenPreview() {
-    GameOfLifeAppTheme {
-        GameOfLifeScreen()
     }
 }
